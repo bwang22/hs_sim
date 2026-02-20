@@ -1,0 +1,393 @@
+import { BgsPlayerEntity, BgsQuestEntity, BoardTrinket } from '../bgs-player-entity';
+import { BoardEnchantment, BoardEntity } from '../board-entity';
+import { BoardSecret } from '../board-secret';
+import { OnDivineShieldUpdatedInput } from '../keywords/divine-shield';
+import { OnRebornUpdatedInput } from '../keywords/reborn';
+import { OnStealthUpdatedInput } from '../keywords/stealth';
+import { OnTauntUpdatedInput } from '../keywords/taunt';
+import { OnVenomousUpdatedInput } from '../keywords/venomous';
+import { OnWindfuryUpdatedInput } from '../keywords/windfury';
+import {
+	OnDespawnInput,
+	OnOtherSpawnAuraInput,
+	OnOtherSpawnInput,
+	OnSpawnInput,
+} from '../simulation/add-minion-to-board';
+import { OnAfterDeathInput, OnDeathInput, OnMinionKilledInput } from '../simulation/attack';
+import { AvengeInput } from '../simulation/avenge';
+import { BattlecryInput, OnBattlecryTriggeredInput } from '../simulation/battlecries';
+import { PlayedBloodGemsOnAnyInput, PlayedBloodGemsOnMeInput } from '../simulation/blood-gems';
+import { OnCardAddedToHandInput } from '../simulation/cards-in-hand';
+import { AfterDealDamageInput } from '../simulation/damage-effects';
+import { AfterHeroDamagedInput } from '../simulation/damage-to-hero';
+import { DeathrattleTriggeredInput } from '../simulation/deathrattle-on-trigger';
+import { FullGameState } from '../simulation/internal-game-state';
+import {
+	OnAfterMagnetizeInput,
+	OnAfterMagnetizeSelfInput,
+	OnBeforeMagnetizeInput,
+	OnBeforeMagnetizeSelfInput,
+} from '../simulation/magnetize';
+import { OnAttackInput } from '../simulation/on-attack';
+import { OnMinionAttackedInput } from '../simulation/on-being-attacked';
+import { RebornEffectInput } from '../simulation/reborn';
+import { SoCInput } from '../simulation/start-of-combat/start-of-combat-input';
+import { OnStatsChangedInput } from '../simulation/stats';
+
+export interface Card {
+	// Maybe should make this mandatory
+	cardIds?: readonly string[];
+	startOfCombat?: (
+		trinket: BoardEntity | BoardTrinket | BgsPlayerEntity | BoardSecret,
+		input: SoCInput,
+	) => boolean | { hasTriggered: boolean; shouldRecomputeCurrentAttacker: boolean };
+}
+
+export interface DefaultChargesCard extends Card {
+	defaultCharges: (entity: BoardEntity) => number;
+}
+export const hasDefaultCharges = (card: Card): card is DefaultChargesCard =>
+	(card as DefaultChargesCard)?.defaultCharges !== undefined;
+
+export interface StartOfCombatCard extends Card {
+	startOfCombatTiming?: StartOfCombatTiming;
+	startOfCombat: NonNullable<Card['startOfCombat']>;
+}
+export const hasStartOfCombat = (card: Card): card is StartOfCombatCard =>
+	(card as StartOfCombatCard)?.startOfCombat !== undefined;
+export interface StartOfCombatFromHandCard extends StartOfCombatCard {
+	startOfCombatFromHand: true;
+}
+export const hasStartOfCombatFromHand = (card: Card): card is StartOfCombatFromHandCard =>
+	(card as StartOfCombatFromHandCard)?.startOfCombatFromHand !== undefined;
+export type StartOfCombatTiming = 'start-of-combat' | 'pre-combat' | 'illidan';
+
+export interface TavernSpellCard extends Card {
+	castTavernSpell: (spellCardId: string, input: CastSpellInput) => void;
+}
+export const hasCastTavernSpell = (card: Card): card is TavernSpellCard =>
+	(card as TavernSpellCard)?.castTavernSpell !== undefined;
+
+export interface OnTavernSpellCastCard extends Card {
+	onTavernSpellCast: (entity: BoardEntity | BoardTrinket, input: CastSpellInput) => void;
+}
+export const hasOnTavernSpellCast = (card: Card): card is OnTavernSpellCastCard =>
+	(card as OnTavernSpellCastCard)?.onTavernSpellCast !== undefined;
+
+export interface AfterTavernSpellCastCard extends Card {
+	afterTavernSpellCast: (entity: BoardEntity | BoardTrinket, input: CastSpellInput) => void;
+}
+export const hasAfterTavernSpellCast = (card: Card): card is AfterTavernSpellCastCard =>
+	(card as AfterTavernSpellCastCard)?.afterTavernSpellCast !== undefined;
+
+// Whenever this attacks
+export interface RallyCard extends Card {
+	rally: (
+		minion: BoardEntity | BoardTrinket | BoardEnchantment,
+		input: OnAttackInput,
+	) => { dmgDoneByAttacker: number; dmgDoneByDefender: number };
+}
+export const hasRally = (card: Card): card is RallyCard => (card as RallyCard)?.rally !== undefined;
+
+export interface OnWheneverAnotherMinionAttacksCard extends Card {
+	onWheneverAnotherMinionAttacks: (
+		minion: BoardEntity | BoardTrinket | BoardEnchantment,
+		input: OnAttackInput,
+	) => { dmgDoneByAttacker: number; dmgDoneByDefender: number };
+}
+export const hasOnWheneverAnotherMinionAttacks = (card: Card): card is OnWheneverAnotherMinionAttacksCard =>
+	(card as OnWheneverAnotherMinionAttacksCard)?.onWheneverAnotherMinionAttacks !== undefined;
+
+export interface OnMinionAttackedCard extends Card {
+	onAttacked: (minion: BoardEntity, input: OnMinionAttackedInput) => void;
+}
+export const hasOnMinionAttacked = (card: Card): card is OnMinionAttackedCard =>
+	(card as OnMinionAttackedCard)?.onAttacked !== undefined;
+
+export interface OnSpawnedCard extends Card {
+	onSpawned: (minion: BoardEntity, input: OnSpawnInput) => void;
+}
+export const hasOnSpawned = (card: Card): card is OnSpawnedCard => (card as OnSpawnedCard)?.onSpawned !== undefined;
+
+export interface OnOtherSpawnedAuraCard extends Card {
+	onOtherSpawnedAura: (minion: BoardEntity, input: OnOtherSpawnAuraInput) => void;
+}
+export const hasOnOtherAuraSpawned = (card: Card): card is OnOtherSpawnedAuraCard =>
+	(card as OnOtherSpawnedAuraCard)?.onOtherSpawnedAura !== undefined;
+
+export interface OnOtherSpawnedCard extends Card {
+	onOtherSpawned: (minion: BoardEntity, input: OnOtherSpawnInput) => void;
+}
+export const hasOnOtherSpawned = (card: Card): card is OnOtherSpawnedCard =>
+	(card as OnOtherSpawnedCard)?.onOtherSpawned !== undefined;
+
+export interface AfterOtherSpawnedCard extends Card {
+	afterOtherSpawned: (minion: BoardEntity | BoardTrinket, input: OnOtherSpawnInput) => void;
+}
+export const hasAfterOtherSpawned = (card: Card): card is AfterOtherSpawnedCard =>
+	(card as AfterOtherSpawnedCard)?.afterOtherSpawned !== undefined;
+
+export interface OnDespawnedCard extends Card {
+	onDespawned: (minion: BoardEntity, input: OnDespawnInput) => void;
+}
+export const hasOnDespawned = (card: Card): card is OnDespawnedCard =>
+	(card as OnDespawnedCard)?.onDespawned !== undefined;
+
+export interface DeathrattleSpawnCard extends Card {
+	deathrattleSpawn: (minion: BoardEntity, input: DeathrattleTriggeredInput) => readonly BoardEntity[];
+}
+export const hasDeathrattleSpawn = (card: Card): card is DeathrattleSpawnCard =>
+	(card as DeathrattleSpawnCard)?.deathrattleSpawn !== undefined;
+
+export interface BattlecryCard extends Card {
+	// boolean return type is used only for conditional battlecries (eg cards that only work as battlecries if a specific trinket
+	// is in game)
+	battlecry: (minion: BoardEntity, input: BattlecryInput) => boolean;
+}
+export const hasBattlecry = (card: Card): card is BattlecryCard => (card as BattlecryCard)?.battlecry !== undefined;
+
+export interface RebornEffectCard extends Card {
+	rebornEffect: (minion: BoardEntity, input: RebornEffectInput) => void;
+}
+export const hasRebornEffect = (card: Card): card is RebornEffectCard =>
+	(card as RebornEffectCard)?.rebornEffect !== undefined;
+
+export interface RebornSelfEffectCard extends Card {
+	rebornSelfEffect: (minion: BoardEntity, input: RebornEffectInput) => void;
+}
+export const hasRebornSelfEffect = (card: Card): card is RebornSelfEffectCard =>
+	(card as RebornSelfEffectCard)?.rebornSelfEffect !== undefined;
+
+export interface OnBattlecryTriggeredCard extends Card {
+	onBattlecryTriggered: (minion: BoardEntity, input: OnBattlecryTriggeredInput) => void;
+}
+export const hasOnBattlecryTriggered = (card: Card): card is OnBattlecryTriggeredCard =>
+	(card as OnBattlecryTriggeredCard)?.onBattlecryTriggered !== undefined;
+
+export interface AvengeCard extends Card {
+	avenge: (minion: BoardEntity | BoardTrinket, input: AvengeInput) => void | readonly BoardEntity[];
+	baseAvengeValue: (cardId: string) => number;
+}
+export const hasAvenge = (card: Card): card is AvengeCard => (card as AvengeCard)?.avenge !== undefined;
+
+export interface DefaultScriptDataNumCard extends Card {
+	defaultScriptDataNum: (cardId: string) => number;
+}
+export const hasDefaultScriptDataNum = (card: Card): card is DefaultScriptDataNumCard =>
+	(card as DefaultScriptDataNumCard)?.defaultScriptDataNum !== undefined;
+
+/** To use when another deathrattle is triggered */
+export interface DeathrattleTriggeredCard extends Card {
+	onDeathrattleTriggered: (minion: BoardEntity | BoardTrinket, input: DeathrattleTriggeredInput) => void;
+}
+export const hasOnDeathrattleTriggered = (card: Card): card is DeathrattleTriggeredCard =>
+	(card as DeathrattleTriggeredCard)?.onDeathrattleTriggered !== undefined;
+
+// export interface DeathrattleEnchantmentEffectCard extends Card {
+// 	deathrattleEffectEnchantmentEffect: (
+// 		minion: { cardId: string; originEntityId?: number; repeats?: number },
+// 		input: DeathrattleTriggeredInput,
+// 	) => void;
+// 	cardIds: readonly string[];
+// }
+// export const hasDeathrattleEnchantmentEffect = (card: Card): card is DeathrattleEnchantmentEffectCard =>
+// 	(card as DeathrattleEnchantmentEffectCard)?.deathrattleEffectEnchantmentEffect !== undefined;
+
+export interface DeathrattleSpawnEnchantmentCard extends Card {
+	deathrattleSpawnEnchantmentEffect: (
+		enchantment: { cardId: string; originEntityId?: number; repeats?: number },
+		minion: BoardEntity | null | undefined,
+		input: DeathrattleTriggeredInput,
+	) => readonly BoardEntity[];
+	cardIds: readonly string[];
+}
+export const hasDeathrattleSpawnEnchantment = (card: Card): card is DeathrattleSpawnEnchantmentCard =>
+	(card as DeathrattleSpawnEnchantmentCard)?.deathrattleSpawnEnchantmentEffect !== undefined;
+
+export interface OnCardAddedToHandCard extends Card {
+	onCardAddedToHand: (entity: BoardEntity | BgsQuestEntity, input: OnCardAddedToHandInput) => void;
+}
+export const hasOnCardAddedToHand = (card: Card): card is OnCardAddedToHandCard =>
+	(card as OnCardAddedToHandCard)?.onCardAddedToHand !== undefined;
+
+export interface EndOfTurnCard extends Card {
+	// Use BattlecryInput because it's the only way end of turn effects are triggered
+	endOfTurn: (entity: BoardEntity, input: EndOfTurnInput) => void;
+}
+export const hasEndOfTurn = (card: Card): card is EndOfTurnCard => (card as EndOfTurnCard)?.endOfTurn !== undefined;
+export type EndOfTurnInput = BattlecryInput;
+
+export interface OnDivineShieldUpdatedCard extends Card {
+	onDivineShieldUpdated: (entity: BoardEntity | BoardTrinket, input: OnDivineShieldUpdatedInput) => void;
+}
+export const hasOnDivineShieldUpdated = (card: Card): card is OnDivineShieldUpdatedCard =>
+	(card as OnDivineShieldUpdatedCard)?.onDivineShieldUpdated !== undefined;
+
+export interface OnTauntUpdatedCard extends Card {
+	onTauntUpdated: (
+		entity: BoardEntity,
+		impactedEntity: BoardEntity,
+		previousValue: boolean,
+		input: OnTauntUpdatedInput,
+	) => void;
+}
+export const hasOnTauntUpdated = (card: Card): card is OnTauntUpdatedCard =>
+	(card as OnTauntUpdatedCard)?.onTauntUpdated !== undefined;
+
+export interface OnRebornUpdatedCard extends Card {
+	onRebornUpdated: (
+		entity: BoardEntity,
+		impactedEntity: BoardEntity,
+		previousValue: boolean,
+		input: OnRebornUpdatedInput,
+	) => void;
+}
+export const hasOnRebornUpdated = (card: Card): card is OnRebornUpdatedCard =>
+	(card as OnRebornUpdatedCard)?.onRebornUpdated !== undefined;
+
+export interface OnStealthUpdatedCard extends Card {
+	onStealthUpdated: (
+		entity: BoardEntity,
+		impactedEntity: BoardEntity,
+		previousValue: boolean,
+		input: OnStealthUpdatedInput,
+	) => void;
+}
+export const hasOnStealthUpdated = (card: Card): card is OnStealthUpdatedCard =>
+	(card as OnStealthUpdatedCard)?.onStealthUpdated !== undefined;
+
+export interface OnVenomousUpdatedCard extends Card {
+	onVenomousUpdated: (
+		entity: BoardEntity,
+		impactedEntity: BoardEntity,
+		previousValue: boolean,
+		input: OnVenomousUpdatedInput,
+	) => void;
+}
+export const hasOnVenomousUpdated = (card: Card): card is OnVenomousUpdatedCard =>
+	(card as OnVenomousUpdatedCard)?.onVenomousUpdated !== undefined;
+
+export interface OnWindfuryUpdatedCard extends Card {
+	onWindfuryUpdated: (
+		entity: BoardEntity,
+		impactedEntity: BoardEntity,
+		previousValue: boolean,
+		input: OnWindfuryUpdatedInput,
+	) => void;
+}
+export const hasOnWindfuryUpdated = (card: Card): card is OnWindfuryUpdatedCard =>
+	(card as OnWindfuryUpdatedCard)?.onWindfuryUpdated !== undefined;
+
+export interface OnStatsChangedCard extends Card {
+	onStatsChanged: (entity: BoardEntity, input: OnStatsChangedInput) => void;
+}
+export const hasOnStatsChanged = (card: Card): card is OnStatsChangedCard =>
+	(card as OnStatsChangedCard)?.onStatsChanged !== undefined;
+
+export interface AfterHeroDamagedCard extends Card {
+	afterHeroDamaged: (entity: BoardEntity, input: AfterHeroDamagedInput) => void;
+}
+export const hasAfterHeroDamaged = (card: Card): card is AfterHeroDamagedCard =>
+	(card as AfterHeroDamagedCard)?.afterHeroDamaged !== undefined;
+
+export interface OnDamagedCard extends Card {
+	onDamaged: (entity: BoardEntity, input: OnDamagedInput) => void;
+}
+export const hasOnDamaged = (card: Card): card is OnDamagedCard => (card as OnDamagedCard)?.onDamaged !== undefined;
+
+export interface AfterDealDamageCard extends Card {
+	// Called whenever damage is dealt, both on the friendly and enemy side
+	// So you need to check the "friendly" flag
+	afterDealDamage: (entity: BoardEntity, input: AfterDealDamageInput) => void;
+}
+export const hasAfterDealDamage = (card: Card): card is AfterDealDamageCard =>
+	(card as AfterDealDamageCard)?.afterDealDamage !== undefined;
+
+export interface OnDeathCard extends Card {
+	onDeath: (entity: BoardEntity, input: OnDeathInput) => void;
+}
+export const hasOnDeath = (card: Card): card is OnDeathCard => (card as OnDeathCard)?.onDeath !== undefined;
+
+export interface OnAfterDeathCard extends Card {
+	onAfterDeath: (entity: BoardEntity | BoardTrinket, input: OnAfterDeathInput) => void;
+}
+export const hasOnAfterDeath = (card: Card): card is OnAfterDeathCard =>
+	(card as OnAfterDeathCard)?.onAfterDeath !== undefined;
+
+export interface OnMinionKilledCard extends Card {
+	onMinionKilled: (
+		entity: BoardEntity,
+		input: OnMinionKilledInput,
+	) => { dmgDoneByAttacker: number; dmgDoneByDefender: number };
+}
+export const hasOnMinionKilled = (card: Card): card is OnMinionKilledCard =>
+	(card as OnMinionKilledCard)?.onMinionKilled !== undefined;
+
+export interface OnBeforeMagnetizeCard extends Card {
+	onBeforeMagnetize: (entity: BoardEntity, input: OnBeforeMagnetizeInput) => void;
+}
+export const hasOnBeforeMagnetize = (card: Card): card is OnBeforeMagnetizeCard =>
+	(card as OnBeforeMagnetizeCard)?.onBeforeMagnetize !== undefined;
+
+export interface OnBeforeMagnetizeSelfCard extends Card {
+	onBeforeMagnetizeSelf: (entity: BoardEntity, input: OnBeforeMagnetizeSelfInput) => void;
+}
+export const hasOnBeforeMagnetizeSelf = (card: Card): card is OnBeforeMagnetizeSelfCard =>
+	(card as OnBeforeMagnetizeSelfCard)?.onBeforeMagnetizeSelf !== undefined;
+
+export interface OnAfterMagnetizeSelfCard extends Card {
+	onAfterMagnetizeSelf: (entity: BoardEntity, input: OnAfterMagnetizeSelfInput) => void;
+}
+export const hasOnAfterMagnetizeSelf = (card: Card): card is OnAfterMagnetizeSelfCard =>
+	(card as OnAfterMagnetizeSelfCard)?.onAfterMagnetizeSelf !== undefined;
+
+export interface OnAfterMagnetizeCard extends Card {
+	onAfterMagnetize: (entity: BoardEntity, input: OnAfterMagnetizeInput) => void;
+}
+export const hasOnAfterMagnetize = (card: Card): card is OnAfterMagnetizeCard =>
+	(card as OnAfterMagnetizeCard)?.onAfterMagnetize !== undefined;
+
+export interface OnSpawnFailCard extends Card {
+	onSpawnFail: (entity: BoardEntity, input: OnSpawnFailInput) => void;
+}
+export const hasOnSpawnFail = (card: Card): card is OnSpawnFailCard =>
+	(card as OnSpawnFailCard)?.onSpawnFail !== undefined;
+
+export interface PlayedBloodGemsOnMeCard extends Card {
+	playedBloodGemsOnMe: (entity: BoardEntity, input: PlayedBloodGemsOnMeInput) => void;
+}
+export const hasPlayedBloodGemsOnMe = (card: Card): card is PlayedBloodGemsOnMeCard =>
+	(card as PlayedBloodGemsOnMeCard)?.playedBloodGemsOnMe !== undefined;
+
+export interface PlayedBloodGemsOnAnyCard extends Card {
+	playedBloodGemsOnAny: (entity: BoardEntity, input: PlayedBloodGemsOnAnyInput) => void;
+}
+export const hasPlayedBloodGemsOnAny = (card: Card): card is PlayedBloodGemsOnAnyCard =>
+	(card as PlayedBloodGemsOnAnyCard)?.playedBloodGemsOnAny !== undefined;
+
+export interface OnSpawnFailInput {
+	failedSpawn: BoardEntity;
+	board: BoardEntity[];
+	hero: BgsPlayerEntity;
+	gameState: FullGameState;
+}
+
+export interface CastSpellInput {
+	spellCardId: string;
+	source: BoardEntity | BoardTrinket | BgsPlayerEntity;
+	target: BoardEntity;
+	board: BoardEntity[];
+	hero: BgsPlayerEntity;
+	otherBoard: BoardEntity[];
+	otherHero: BgsPlayerEntity;
+	gameState: FullGameState;
+}
+export interface OnDamagedInput {
+	damagedEntity: BoardEntity;
+	damageDealer: BoardEntity | BgsPlayerEntity;
+	damage: number;
+	board: BoardEntity[];
+	hero: BgsPlayerEntity;
+	otherHero: BgsPlayerEntity;
+	gameState: FullGameState;
+}

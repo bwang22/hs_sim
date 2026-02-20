@@ -1,0 +1,30 @@
+import { BoardEntity } from '../../../board-entity';
+import { CardIds } from '../../../services/card-ids';
+import { dealDamageToMinion } from '../../../simulation/attack';
+import { OnAttackInput } from '../../../simulation/on-attack';
+import { RallyCard } from '../../card.interface';
+
+export const ArcaneCannoneer: RallyCard = {
+	cardIds: [CardIds.ArcaneCannoneer_BG31_928, CardIds.ArcaneCannoneer_BG31_928_G],
+	rally: (minion: BoardEntity, input: OnAttackInput): { dmgDoneByAttacker: number; dmgDoneByDefender: number } => {
+		const base = minion.cardId === CardIds.ArcaneCannoneer_BG31_928_G ? 4 : 2;
+		const baseBuff = minion.scriptDataNum2 ?? base;
+		// The info is already included in the scriptDataNum2
+		const mult = 1;
+		const buff = baseBuff * mult;
+		if (!input.defendingEntity) {
+			return { dmgDoneByAttacker: 0, dmgDoneByDefender: 0 };
+		}
+		const dmg = dealDamageToMinion(
+			input.defendingEntity,
+			input.defendingBoard,
+			input.defendingHero,
+			input.attacker,
+			1 * buff,
+			input.attackingBoard,
+			input.attackingHero,
+			input.gameState,
+		);
+		return { dmgDoneByAttacker: dmg, dmgDoneByDefender: 0 };
+	},
+};

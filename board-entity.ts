@@ -1,0 +1,80 @@
+export interface BoardEntity {
+	entityId: number;
+	cardId: string;
+	attack: number;
+	health: number;
+
+	maxHealth?: number;
+	maxAttack?: number;
+	avengeCurrent?: number;
+	avengeDefault?: number;
+	frenzyChargesLeft?: number;
+	definitelyDead?: boolean;
+	taunt?: boolean;
+	divineShield?: boolean;
+	strongDivineShield?: boolean;
+	poisonous?: boolean;
+	venomous?: boolean;
+	reborn?: boolean;
+	rebornFromEntityId?: number;
+	cleave?: boolean;
+	windfury?: boolean;
+	stealth?: boolean;
+	enchantments?: BoardEnchantment[];
+	pendingAttackBuffs?: number[];
+	scriptDataNum1?: number;
+	scriptDataNum2?: number;
+	scriptDataNum3?: number;
+	scriptDataNum4?: number;
+	scriptDataNum5?: number;
+	scriptDataNum6?: number;
+	inInitialState?: boolean;
+	// For Build-An-Undead and Zilliax
+	additionalCards?: readonly string[] | null;
+	dynamicInfo?: readonly any[] | null;
+	tags?: { [tag: number]: number };
+
+	// When using this as a remembered deathrattle
+	originalCardId?: string;
+
+	// We only store the card id, because we want all the attack and other data to be computed at runtime, based on the
+	// current stats of the Fish
+	rememberedDeathrattles?: BoardEnchantment[];
+	deathrattleRepeats?: number;
+	damageMultiplier?: number;
+	locked?: boolean;
+	friendly?: boolean;
+	cantAttack?: boolean;
+	hasAttacked?: number;
+	immuneWhenAttackCharges?: number;
+	attackImmediately?: boolean;
+	// Used only to handle murkeye aura?
+	previousAttack?: number;
+	lastAffectedByEntity?: BoardEntity;
+	// attacking?: boolean;
+	// Did it have divine shield at least once? (for Sinrunner Blanchy)
+	hadDivineShield?: boolean;
+	abiityChargesLeft?: number;
+	indexFromLeftAtTimeOfDeath?: number;
+	spawnIndexFromRight?: number;
+
+	// permanentAttack?: number;
+	// permanentHealth?: number;
+	tavernTier?: number;
+
+	memory?: any;
+	gildedInCombat?: boolean;
+
+	onCanceledSummon?: () => void;
+}
+
+export interface BoardEnchantment {
+	cardId: string;
+	originEntityId?: number;
+	tagScriptDataNum1?: number;
+	tagScriptDataNum2?: number;
+	timing: number;
+	repeats?: number;
+	value?: number;
+	memory?: any;
+}

@@ -1,0 +1,160 @@
+import { Race } from '@firestone-hs/reference-data';
+import { BgsPlayerEntity } from '../bgs-player-entity';
+import { BoardEntity } from '../board-entity';
+import { hasOnDivineShieldUpdated } from '../cards/card.interface';
+import { cardMappings } from '../cards/impl/_card-mappings';
+import { CardIds } from '../services/card-ids';
+import { pickRandom } from '../services/utils';
+import { FullGameState } from '../simulation/internal-game-state';
+import { modifyStats } from '../simulation/stats';
+import { hasCorrectTribe } from '../utils';
+
+export const updateDivineShield = (
+	entity: BoardEntity,
+	board: BoardEntity[],
+	hero: BgsPlayerEntity,
+	otherHero: BgsPlayerEntity,
+	newValue: boolean,
+	gameState: FullGameState,
+): void => {
+	entity.hadDivineShield = newValue || entity.divineShield || entity.hadDivineShield;
+	if (entity.strongDivineShield && newValue === false) {
+		entity.strongDivineShield = false;
+	} else {
+		entity.divineShield = newValue;
+	}
+	if (entity.divineShield && newValue) {
+		const boardForDrake = board;
+		const statsBonus =
+			6 * boardForDrake.filter((e) => e.cardId === CardIds.CyborgDrake_BG25_043).length +
+			12 * boardForDrake.filter((e) => e.cardId === CardIds.CyborgDrake_BG25_043_G).length;
+		// Don't trigger all "on attack changed" effects, since it's an aura
+		entity.attack += statsBonus;
+	} else if (!entity.divineShield) {
+		// Also consider itself
+		const boardForDrake = board;
+		const statsBonus =
+			6 * boardForDrake.filter((e) => e.cardId === CardIds.CyborgDrake_BG25_043).length +
+			12 * boardForDrake.filter((e) => e.cardId === CardIds.CyborgDrake_BG25_043_G).length;
+		entity.attack -= statsBonus;
+	}
+
+	// Lost divine shield
+	if (entity.hadDivineShield && !entity.divineShield) {
+		const adapter = hero.trinkets
+			.filter((t) => t.cardId === CardIds.MechagonAdapter_BG30_MagicItem_910)
+			.filter((t) => t.scriptDataNum1 > 0)[0];
+		if (!!adapter && hasCorrectTribe(entity, hero, Race.MECH, gameState.anomalies, gameState.allCards)) {
+			updateDivineShield(entity, board, hero, otherHero, true, gameState);
+			adapter.scriptDataNum1--;
+		}
+
+		for (const trinket of hero.trinkets ?? []) {
+			const onDivineShieldUpdatedImpl = cardMappings[trinket.cardId];
+			if (hasOnDivineShieldUpdated(onDivineShieldUpdatedImpl)) {
+				onDivineShieldUpdatedImpl.onDivineShieldUpdated(trinket, {
+					board: board,
+					hero: hero,
+					otherHero: otherHero,
+					gameState: gameState,
+					target: entity,
+					newValue: false,
+					previousValue: true,
+				});
+			}
+		}
+
+		for (const boardEntity of board) {
+			const onDivineShieldUpdatedImpl = cardMappings[boardEntity.cardId];
+			if (hasOnDivineShieldUpdated(onDivineShieldUpdatedImpl)) {
+				onDivineShieldUpdatedImpl.onDivineShieldUpdated(boardEntity, {
+					board: board,
+					hero: hero,
+					otherHero: otherHero,
+					gameState: gameState,
+					target: entity,
+					newValue: false,
+					previousValue: true,
+				});
+			}
+		}
+
+		for (let i = 0; i < board.length; i++) {
+			if (board[i].cardId === CardIds.BolvarFireblood_ICC_858) {
+				modifyStats(board[i], board[i], 2, 0, board, hero, gameState);
+				gameState.spectator.registerPowerTarget(board[i], board[i], board, hero, otherHero);
+				// } else if (board[i].cardId === CardIds.BolvarFireblood_TB_BaconUps_047) {
+				// 	modifyStats(board[i], board[i], 4, 0, board, hero, gameState);
+				// 	gameState.spectator.registerPowerTarget(board[i], board[i], board, hero, otherHero);
+				// } else if (board[i].cardId === CardIds.DrakonidEnforcer_BGS_067) {
+				// 	modifyStats(board[i], board[i], 2, 2, board, hero, gameState);
+				// 	gameState.spectator.registerPowerTarget(board[i], board[i], board, hero, otherHero);
+				// } else if (board[i].cardId === CardIds.DrakonidEnforcer_TB_BaconUps_117) {
+				// 	modifyStats(board[i], board[i], 4, 4, board, hero, gameState);
+				// 	gameState.spectator.registerPowerTarget(board[i], board[i], board, hero, otherHero);
+			}
+			// } else if (
+			// 	board[i].cardId === CardIds.CogworkCopter_BG24_008 ||
+			// 	board[i].cardId === CardIds.CogworkCopter_BG24_008_G
+			// ) {
+			// When it's the opponent, the game state already contains all the buffs
+			// if (board[i]?.friendly) {
+			// 	const buff = 1; //board[i].cardId === CardIds.CogworkCopter_BG24_008_G ? 2 : 1;
+			// 	grantRandomStats(
+			// 		board[i],
+			// 		hero.hand.filter(
+			// 			(e) =>
+			// 				gameState.allCards.getCard(e.cardId).type?.toUpperCase() === CardType[CardType.MINION],
+			// 		),
+			// 		hero,
+			// 		buff,
+			// 		buff,
+			// 		null,
+			// 		true,
+			// 		gameState,
+			// 	);
+			// }
+		}
+	}
+};
+
+export const grantRandomDivineShield = (
+	source: BoardEntity,
+	board: BoardEntity[],
+	hero: BgsPlayerEntity,
+	otherHero: BgsPlayerEntity,
+	gameState: FullGameState,
+): void => {
+	const elligibleEntities = board
+		.filter((entity) => !entity.divineShield)
+		.filter((entity) => entity.health > 0 && !entity.definitelyDead);
+	if (elligibleEntities.length > 0) {
+		const chosen = pickRandom(elligibleEntities);
+		updateDivineShield(chosen, board, hero, otherHero, true, gameState);
+		gameState.spectator.registerPowerTarget(source, chosen, board, null, null);
+	}
+};
+
+export const grantDivineShieldToLeftmostMinions = (
+	source: BoardEntity,
+	board: BoardEntity[],
+	hero: BgsPlayerEntity,
+	quantity: number,
+	otherHero: BgsPlayerEntity,
+	gameState: FullGameState,
+): void => {
+	for (let i = 0; i < Math.min(quantity, board.length); i++) {
+		updateDivineShield(board[i], board, hero, otherHero, true, gameState);
+		gameState.spectator.registerPowerTarget(source, board[i], board, null, null);
+	}
+};
+
+export interface OnDivineShieldUpdatedInput {
+	board: BoardEntity[];
+	hero: BgsPlayerEntity;
+	otherHero: BgsPlayerEntity;
+	gameState: FullGameState;
+	target: BoardEntity;
+	newValue: boolean;
+	previousValue: boolean;
+}
