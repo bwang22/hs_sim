@@ -160,6 +160,34 @@ export function applyEvent(state: ReplayState, event: SpectatorEvent): void {
 			return;
 		}
 
+        case 'entity-upsert': {
+        // Update or insert entity stats/keywords so the replay state matches emitted events.
+        // We don’t move it on the board here (spawn/death handle board membership and placement).
+        const e = event.entity;
+
+        const upsertInBoard = (board: any[]) => {
+            if (!board) return;
+            const idx = board.findIndex((x) => x?.entityId === e.entityId);
+            if (idx >= 0) {
+            board[idx] = { ...board[idx], ...e };
+            }
+        };
+
+        // Most replay states have playerBoard/opponentBoard arrays (or similar).
+        // Update whichever side contains the entity.
+        upsertInBoard((state as any).playerBoard);
+        upsertInBoard((state as any).opponentBoard);
+
+        // If you also track “entities by id” / lookup maps, update them too
+        const entities = (state as any).entitiesById;
+        if (entities) {
+            entities[e.entityId] = { ...(entities[e.entityId] ?? {}), ...e };
+        }
+
+        break;
+        }
+
+
 		default: {
 			// Exhaustiveness guard: if you add new event types, TS will force you here if you enable never checks.
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars

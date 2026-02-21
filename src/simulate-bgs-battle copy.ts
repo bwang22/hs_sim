@@ -12,7 +12,6 @@ import { FullGameState } from './simulation/internal-game-state';
 import { SharedState } from './simulation/shared-state';
 import { Simulator } from './simulation/simulator';
 import { Spectator } from './simulation/spectator/spectator';
-import type { GameEvent } from './simulation/spectator/game-action';
 
 let globalCards = new AllCardsService();
 
@@ -23,13 +22,13 @@ export const assignCards = (cards: AllCardsService) => {
 // This example demonstrates a NodeJS 8.10 async handler[1], however of course you could use
 // the more traditional callback-style handler.
 // [1]: https://aws.amazon.com/blogs/compute/node-js-8-10-runtime-now-available-in-aws-lambda/
-export default async (lambdaEvent): Promise<any> => {
-	if (!lambdaEvent.body?.length) {
-		console.warn('missing event body', lambdaEvent);
+export default async (event): Promise<any> => {
+	if (!event.body?.length) {
+		console.warn('missing event body', event);
 		return;
 	}
 
-	const battleInput: BgsBattleInfo = JSON.parse(lambdaEvent.body);
+	const battleInput: BgsBattleInfo = JSON.parse(event.body);
 	const cards = globalCards;
 	await cards.initializeCardsDb();
 	const cardsData = new CardsData(cards, false);
@@ -174,14 +173,9 @@ export const simulateBattle = function* (
 	updateSimulationResult(simulationResult, inputReady, damageConfidence);
 	!battleInput.options?.skipInfoLogs && console.timeEnd('simulation');
 	spectator.prune();
-
-	// Normalize spectator output to the new event-based "game-action" shape:
-	// - prefer `events` over legacy `actions`
-	// - migrate deprecated `targetEntityId` -> `targetEntityIds`
-	const rawOutcomeSamples = spectator.buildOutcomeSamples(battleInput.gameState);
-	simulationResult.outcomeSamples = normalizeOutcomeSamplesToEvents(rawOutcomeSamples);
-
+	simulationResult.outcomeSamples = spectator.buildOutcomeSamples(battleInput.gameState);
 	// Avoid sending this verbose data
+
 	simulationResult.damageWons = [];
 	simulationResult.damageLosts = [];
 	// !battleInput.options?.skipInfoLogs && console.timeEnd('full-sim');
@@ -216,6 +210,8 @@ const updateSimulationResult = (simulationResult: SimulationResult, input: BgsBa
 		totalMatches,
 	);
 
+	// simulationResult.wonLethalPercent = Math.round((10 * (100 * simulationResult.wonLethal)) / totalMatches) / 10;
+	// simulationResult.lostLethalPercent = Math.round((10 * (100 * simulationResult.lostLethal)) / totalMatches) / 10;
 	const totalDamageWon = simulationResult.damageWons.reduce((a, b) => a + b, 0);
 	const totalDamageLost = simulationResult.damageLosts.reduce((a, b) => a + b, 0);
 	const damageWonRange = calculateDamageRange(simulationResult.damageWons, damageConfidence);
@@ -267,48 +263,6 @@ const checkRounding = (roundedValue: number, initialValue: number, totalValue: n
 		return 99.9;
 	}
 	return roundedValue;
-};
-
-/**
- * Converts any legacy "actions" arrays to the new "events" array, and migrates deprecated fields.
- * This is intentionally defensive, so it works whether Spectator already emits events or still emits actions.
- */
-const normalizeOutcomeSamplesToEvents = (outcomeSamples: any): any => {
-	if (!outcomeSamples) {
-		return outcomeSamples;
-	}
-
-	const samples = Array.isArray(outcomeSamples) ? outcomeSamples : outcomeSamples?.samples ?? outcomeSamples;
-	if (!Array.isArray(samples)) {
-		return outcomeSamples;
-	}
-
-	for (const sample of samples) {
-		// 1) `actions` -> `events`
-		if (sample?.actions && !sample?.events) {
-			sample.events = sample.actions;
-			delete sample.actions;
-		}
-
-		// 2) migrate deprecated targetEntityId -> targetEntityIds for each event
-		const evs: readonly GameEvent[] | undefined = sample?.events;
-		if (Array.isArray(evs)) {
-			for (const ev of evs as any[]) {
-				if (!ev || typeof ev !== 'object') {
-					continue;
-				}
-				if ('targetEntityId' in ev && !('targetEntityIds' in ev)) {
-					const tid = (ev as any).targetEntityId;
-					if (typeof tid === 'number') {
-						(ev as any).targetEntityIds = [tid];
-					}
-					delete (ev as any).targetEntityId;
-				}
-			}
-		}
-	}
-
-	return outcomeSamples;
 };
 
 // Used when triggering random deathrattles
