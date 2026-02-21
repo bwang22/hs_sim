@@ -1,0 +1,552 @@
+
+#2 power-target phase=ATTACK
+event={"seq":2,"type":"power-target","phase":"ATTACK","sourceEntityId":7706,"targetEntityIds":[7706]}
+player=7 opponent=7
+P: 7706:BG34_Treasure_994 11/9 | 6715:BG25_007 15/4 | 6717:BG25_007 15/4 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/30 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#3 entity-upsert phase=ATTACK
+event={"seq":3,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":7706,"cardId":"BG34_Treasure_994","friendly":true,"attack":22,"health":18,"maxHealth":18,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=7 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 6715:BG25_007 15/4 | 6717:BG25_007 15/4 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/30 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#4 attack phase=ATTACK
+event={"seq":4,"type":"attack","phase":"ATTACK","attackerEntityId":8857,"defenderEntityId":6715}
+player=7 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 6715:BG25_007 15/4 | 6717:BG25_007 15/4 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/30 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#5 damage phase=ATTACK
+event={"seq":5,"type":"damage","phase":"ATTACK","sourceEntityId":6715,"targetEntityId":8857,"damage":15,"kind":"combat"}
+player=7 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 6715:BG25_007 15/4 | 6717:BG25_007 15/4 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#6 damage phase=ATTACK
+event={"seq":6,"type":"damage","phase":"ATTACK","sourceEntityId":8857,"targetEntityId":6715,"damage":33,"kind":"combat"}
+player=7 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 6715:BG25_007 15/0 | 6717:BG25_007 15/4 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#7 damage phase=ATTACK
+event={"seq":7,"type":"damage","phase":"ATTACK","sourceEntityId":-1,"targetEntityId":6717,"damage":29,"kind":"combat"}
+player=7 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 6715:BG25_007 15/0 | 6717:BG25_007 15/0 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#8 minion-death phase=DEATHS
+event={"seq":8,"type":"minion-death","phase":"DEATHS","deadEntityIds":[6715,6717],"deadMinionsPositionsOnBoard":[1,1]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#9 power-target phase=ATTACK
+event={"seq":9,"type":"power-target","phase":"ATTACK","sourceEntityId":6715,"targetEntityIds":[8032]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 14/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#10 entity-upsert phase=ATTACK
+event={"seq":10,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":8032,"cardId":"BG30_125","friendly":true,"attack":15,"health":4,"maxHealth":4,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 15/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#11 power-target phase=ATTACK
+event={"seq":11,"type":"power-target","phase":"ATTACK","sourceEntityId":6715,"targetEntityIds":[7708]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 15/4 | 7708:BG34_Giant_342 17/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#12 entity-upsert phase=ATTACK
+event={"seq":12,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":7708,"cardId":"BG34_Giant_342","friendly":true,"attack":18,"health":9,"maxHealth":9,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 15/4 | 7708:BG34_Giant_342 18/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#13 power-target phase=ATTACK
+event={"seq":13,"type":"power-target","phase":"ATTACK","sourceEntityId":6715,"targetEntityIds":[8332]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 15/4 | 7708:BG34_Giant_342 18/9 | 8332:BG25_010_G 15/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#14 entity-upsert phase=ATTACK
+event={"seq":14,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":8332,"cardId":"BG25_010_G","friendly":true,"attack":16,"health":3,"maxHealth":3,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 15/4 | 7708:BG34_Giant_342 18/9 | 8332:BG25_010_G 16/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#15 power-target phase=ATTACK
+event={"seq":15,"type":"power-target","phase":"ATTACK","sourceEntityId":6717,"targetEntityIds":[8032]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 15/4 | 7708:BG34_Giant_342 18/9 | 8332:BG25_010_G 16/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#16 entity-upsert phase=ATTACK
+event={"seq":16,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":8032,"cardId":"BG30_125","friendly":true,"attack":16,"health":4,"maxHealth":4,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 18/9 | 8332:BG25_010_G 16/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#17 power-target phase=ATTACK
+event={"seq":17,"type":"power-target","phase":"ATTACK","sourceEntityId":6717,"targetEntityIds":[7708]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 18/9 | 8332:BG25_010_G 16/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#18 entity-upsert phase=ATTACK
+event={"seq":18,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":7708,"cardId":"BG34_Giant_342","friendly":true,"attack":19,"health":9,"maxHealth":9,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 16/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#19 power-target phase=ATTACK
+event={"seq":19,"type":"power-target","phase":"ATTACK","sourceEntityId":6717,"targetEntityIds":[8332]}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 16/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#20 entity-upsert phase=ATTACK
+event={"seq":20,"type":"entity-upsert","phase":"ATTACK","entity":{"entityId":8332,"cardId":"BG25_010_G","friendly":true,"attack":17,"health":3,"maxHealth":3,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#21 attack phase=ATTACK
+event={"seq":21,"type":"attack","phase":"ATTACK","attackerEntityId":7706,"defenderEntityId":8886}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/18 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#22 damage phase=ATTACK
+event={"seq":22,"type":"damage","phase":"ATTACK","sourceEntityId":8886,"targetEntityId":7706,"damage":23,"kind":"combat"}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/0 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/25
+
+#23 damage phase=ATTACK
+event={"seq":23,"type":"damage","phase":"ATTACK","sourceEntityId":7706,"targetEntityId":8886,"damage":22,"kind":"combat"}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/0 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/10 | 8886:BG34_Giant_777 23/3
+
+#24 damage phase=ATTACK
+event={"seq":24,"type":"damage","phase":"ATTACK","sourceEntityId":7706,"targetEntityId":8884,"damage":22,"kind":"combat"}
+player=5 opponent=7
+P: 7706:BG34_Treasure_994 22/0 | 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8884:BG34_Giant_676 9/0 | 8886:BG34_Giant_777 23/3
+
+#25 minion-death phase=DEATHS
+event={"seq":25,"type":"minion-death","phase":"DEATHS","deadEntityIds":[7706,8884],"deadMinionsPositionsOnBoard":[0,5]}
+player=4 opponent=6
+P: 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#26 attack phase=ATTACK
+event={"seq":26,"type":"attack","phase":"ATTACK","attackerEntityId":8865,"defenderEntityId":8032}
+player=4 opponent=6
+P: 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/24 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#27 damage phase=ATTACK
+event={"seq":27,"type":"damage","phase":"ATTACK","sourceEntityId":8032,"targetEntityId":8865,"damage":16,"kind":"combat"}
+player=4 opponent=6
+P: 8032:BG30_125 16/4 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#28 damage phase=ATTACK
+event={"seq":28,"type":"damage","phase":"ATTACK","sourceEntityId":8865,"targetEntityId":8032,"damage":28,"kind":"combat"}
+player=4 opponent=6
+P: 8032:BG30_125 16/0 | 7708:BG34_Giant_342 19/9 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#29 damage phase=ATTACK
+event={"seq":29,"type":"damage","phase":"ATTACK","sourceEntityId":-1,"targetEntityId":7708,"damage":24,"kind":"combat"}
+player=4 opponent=6
+P: 8032:BG30_125 16/0 | 7708:BG34_Giant_342 19/0 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#30 minion-death phase=DEATHS
+event={"seq":30,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8032,7708],"deadMinionsPositionsOnBoard":[0,0]}
+player=2 opponent=6
+P: 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#31 spawn phase=DEATHS
+event={"seq":31,"type":"spawn","phase":"DEATHS","sourceEntityId":8032,"spawned":[{"entityId":8891,"cardId":"BG_ICC_026t","friendly":true,"attack":14,"health":2,"maxHealth":2},{"entityId":8892,"cardId":"BG_ICC_026t","friendly":true,"attack":14,"health":2,"maxHealth":2},{"entityId":8893,"cardId":"BG_ICC_026t","friendly":true,"attack":14,"health":2,"maxHealth":2}],"insertIndexes":[0,1,2]}
+player=5 opponent=6
+P: 8891:BG_ICC_026t 14/2 | 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#32 attack phase=ATTACK
+event={"seq":32,"type":"attack","phase":"ATTACK","attackerEntityId":8891,"defenderEntityId":8886}
+player=5 opponent=6
+P: 8891:BG_ICC_026t 14/2 | 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#33 damage phase=ATTACK
+event={"seq":33,"type":"damage","phase":"ATTACK","sourceEntityId":8886,"targetEntityId":8891,"damage":23,"kind":"combat"}
+player=5 opponent=6
+P: 8891:BG_ICC_026t 14/0 | 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/3
+
+#34 damage phase=ATTACK
+event={"seq":34,"type":"damage","phase":"ATTACK","sourceEntityId":8891,"targetEntityId":8886,"damage":14,"kind":"combat"}
+player=5 opponent=6
+P: 8891:BG_ICC_026t 14/0 | 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10 | 8886:BG34_Giant_777 23/0
+
+#35 minion-death phase=DEATHS
+event={"seq":35,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8891,8886],"deadMinionsPositionsOnBoard":[0,5]}
+player=4 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#36 attack phase=ATTACK
+event={"seq":36,"type":"attack","phase":"ATTACK","attackerEntityId":8872,"defenderEntityId":8332}
+player=4 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/50 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#37 damage phase=ATTACK
+event={"seq":37,"type":"damage","phase":"ATTACK","sourceEntityId":8332,"targetEntityId":8872,"damage":17,"kind":"combat"}
+player=4 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/3 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#38 damage phase=ATTACK
+event={"seq":38,"type":"damage","phase":"ATTACK","sourceEntityId":8872,"targetEntityId":8332,"damage":56,"kind":"combat"}
+player=4 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8332:BG25_010_G 17/0 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#39 minion-death phase=DEATHS
+event={"seq":39,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8332],"deadMinionsPositionsOnBoard":[2]}
+player=3 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#40 spawn phase=DEATHS
+event={"seq":40,"type":"spawn","phase":"DEATHS","sourceEntityId":8332,"spawned":[{"entityId":8894,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":true,"windfury":false,"stealth":false},{"entityId":8895,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":true,"windfury":false,"stealth":false}],"insertIndexes":[2,3]}
+player=5 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#41 spawn phase=DEATHS
+event={"seq":41,"type":"spawn","phase":"DEATHS","sourceEntityId":8332,"spawned":[{"entityId":8897,"cardId":"BG25_010_G","friendly":true,"attack":30,"health":4,"maxHealth":4,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[4]}
+player=6 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#42 attack phase=ATTACK
+event={"seq":42,"type":"attack","phase":"ATTACK","attackerEntityId":8892,"defenderEntityId":8881}
+player=6 opponent=5
+P: 8892:BG_ICC_026t 14/2 | 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#43 damage phase=ATTACK
+event={"seq":43,"type":"damage","phase":"ATTACK","sourceEntityId":8881,"targetEntityId":8892,"damage":12,"kind":"combat"}
+player=6 opponent=5
+P: 8892:BG_ICC_026t 14/0 | 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/10
+
+#44 damage phase=ATTACK
+event={"seq":44,"type":"damage","phase":"ATTACK","sourceEntityId":8892,"targetEntityId":8881,"damage":14,"kind":"combat"}
+player=6 opponent=5
+P: 8892:BG_ICC_026t 14/0 | 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17 | 8881:BG32_846 12/0
+
+#45 minion-death phase=DEATHS
+event={"seq":45,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8892,8881],"deadMinionsPositionsOnBoard":[0,4]}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17
+
+#46 attack phase=ATTACK
+event={"seq":46,"type":"attack","phase":"ATTACK","attackerEntityId":8877,"defenderEntityId":6720}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/17
+
+#47 damage phase=ATTACK
+event={"seq":47,"type":"damage","phase":"ATTACK","sourceEntityId":6720,"targetEntityId":8877,"damage":5,"kind":"combat"}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/3
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/12
+
+#48 damage phase=ATTACK
+event={"seq":48,"type":"damage","phase":"ATTACK","sourceEntityId":8877,"targetEntityId":6720,"damage":18,"kind":"combat"}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 6720:BG34_Giant_201 5/0
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/12
+
+#49 minion-death phase=DEATHS
+event={"seq":49,"type":"minion-death","phase":"DEATHS","deadEntityIds":[6720],"deadMinionsPositionsOnBoard":[4]}
+player=4 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/12
+
+#50 spawn phase=DEATHS
+event={"seq":50,"type":"spawn","phase":"DEATHS","sourceEntityId":6720,"spawned":[{"entityId":8898,"cardId":"BG34_Giant_201","friendly":true,"attack":4,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[4]}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/12
+
+#51 attack phase=ATTACK
+event={"seq":51,"type":"attack","phase":"ATTACK","attackerEntityId":8893,"defenderEntityId":8877}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/2 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/12
+
+#52 damage phase=ATTACK
+event={"seq":52,"type":"damage","phase":"ATTACK","sourceEntityId":8877,"targetEntityId":8893,"damage":18,"kind":"combat"}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/0 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/12
+
+#53 damage phase=ATTACK
+event={"seq":53,"type":"damage","phase":"ATTACK","sourceEntityId":8893,"targetEntityId":8877,"damage":14,"kind":"combat"}
+player=5 opponent=4
+P: 8893:BG_ICC_026t 14/0 | 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33 | 8877:BG32_846 18/0
+
+#54 minion-death phase=DEATHS
+event={"seq":54,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8893,8877],"deadMinionsPositionsOnBoard":[0,3]}
+player=4 opponent=3
+P: 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#55 attack phase=ATTACK
+event={"seq":55,"type":"attack","phase":"ATTACK","attackerEntityId":8857,"defenderEntityId":8894}
+player=4 opponent=3
+P: 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/15 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#56 damage phase=ATTACK
+event={"seq":56,"type":"damage","phase":"ATTACK","sourceEntityId":8894,"targetEntityId":8857,"damage":15,"kind":"combat"}
+player=4 opponent=3
+P: 8894:BG25_010t 15/2 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/0 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#57 damage phase=ATTACK
+event={"seq":57,"type":"damage","phase":"ATTACK","sourceEntityId":8857,"targetEntityId":8894,"damage":33,"kind":"combat"}
+player=4 opponent=3
+P: 8894:BG25_010t 15/0 | 8895:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/0 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#58 damage phase=ATTACK
+event={"seq":58,"type":"damage","phase":"ATTACK","sourceEntityId":-1,"targetEntityId":8895,"damage":31,"kind":"combat"}
+player=4 opponent=3
+P: 8894:BG25_010t 15/0 | 8895:BG25_010t 15/0 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8857:BGS_126 33/0 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#59 minion-death phase=DEATHS
+event={"seq":59,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8857,8894,8895],"deadMinionsPositionsOnBoard":[0,0,0]}
+player=2 opponent=2
+P: 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#60 spawn phase=DEATHS
+event={"seq":60,"type":"spawn","phase":"DEATHS","sourceEntityId":8857,"spawned":[{"entityId":8899,"cardId":"BGS_126","friendly":false,"attack":6,"health":1,"maxHealth":3,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[0]}
+player=2 opponent=3
+P: 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8899:BGS_126 6/1 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#61 spawn phase=DEATHS
+event={"seq":61,"type":"spawn","phase":"DEATHS","sourceEntityId":8894,"spawned":[{"entityId":8900,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[0]}
+player=3 opponent=3
+P: 8900:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8899:BGS_126 6/1 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#62 spawn phase=DEATHS
+event={"seq":62,"type":"spawn","phase":"DEATHS","sourceEntityId":8895,"spawned":[{"entityId":8901,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[1]}
+player=4 opponent=3
+P: 8900:BG25_010t 15/2 | 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8899:BGS_126 6/1 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#63 attack phase=ATTACK
+event={"seq":63,"type":"attack","phase":"ATTACK","attackerEntityId":8900,"defenderEntityId":8899}
+player=4 opponent=3
+P: 8900:BG25_010t 15/2 | 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8899:BGS_126 6/1 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#64 damage phase=ATTACK
+event={"seq":64,"type":"damage","phase":"ATTACK","sourceEntityId":8899,"targetEntityId":8900,"damage":6,"kind":"combat"}
+player=4 opponent=3
+P: 8900:BG25_010t 15/0 | 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8899:BGS_126 6/1 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#65 damage phase=ATTACK
+event={"seq":65,"type":"damage","phase":"ATTACK","sourceEntityId":8900,"targetEntityId":8899,"damage":15,"kind":"combat"}
+player=4 opponent=3
+P: 8900:BG25_010t 15/0 | 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8899:BGS_126 6/0 | 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#66 minion-death phase=DEATHS
+event={"seq":66,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8900,8899],"deadMinionsPositionsOnBoard":[0,0]}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#67 attack phase=ATTACK
+event={"seq":67,"type":"attack","phase":"ATTACK","attackerEntityId":8865,"defenderEntityId":8898}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8865:BGS_126 28/8 | 8872:BG34_500 56/33
+
+#68 damage phase=ATTACK
+event={"seq":68,"type":"damage","phase":"ATTACK","sourceEntityId":8898,"targetEntityId":8865,"damage":4,"kind":"combat"}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/2
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#69 damage phase=ATTACK
+event={"seq":69,"type":"damage","phase":"ATTACK","sourceEntityId":8865,"targetEntityId":8898,"damage":28,"kind":"combat"}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/4 | 8898:BG34_Giant_201 4/0
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#70 damage phase=ATTACK
+event={"seq":70,"type":"damage","phase":"ATTACK","sourceEntityId":-1,"targetEntityId":8897,"damage":26,"kind":"combat"}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8897:BG25_010_G 30/0 | 8898:BG34_Giant_201 4/0
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#71 minion-death phase=DEATHS
+event={"seq":71,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8897,8898],"deadMinionsPositionsOnBoard":[1,1]}
+player=1 opponent=2
+P: 8901:BG25_010t 15/2
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#72 spawn phase=DEATHS
+event={"seq":72,"type":"spawn","phase":"DEATHS","sourceEntityId":8897,"spawned":[{"entityId":8902,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":true,"windfury":false,"stealth":false},{"entityId":8903,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":true,"windfury":false,"stealth":false}],"insertIndexes":[1,2]}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#73 attack phase=ATTACK
+event={"seq":73,"type":"attack","phase":"ATTACK","attackerEntityId":8901,"defenderEntityId":8865}
+player=3 opponent=2
+P: 8901:BG25_010t 15/2 | 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#74 damage phase=ATTACK
+event={"seq":74,"type":"damage","phase":"ATTACK","sourceEntityId":8865,"targetEntityId":8901,"damage":28,"kind":"combat"}
+player=3 opponent=2
+P: 8901:BG25_010t 15/0 | 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8865:BGS_126 28/4 | 8872:BG34_500 56/33
+
+#75 damage phase=ATTACK
+event={"seq":75,"type":"damage","phase":"ATTACK","sourceEntityId":8901,"targetEntityId":8865,"damage":15,"kind":"combat"}
+player=3 opponent=2
+P: 8901:BG25_010t 15/0 | 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8865:BGS_126 28/0 | 8872:BG34_500 56/33
+
+#76 minion-death phase=DEATHS
+event={"seq":76,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8901,8865],"deadMinionsPositionsOnBoard":[0,0]}
+player=2 opponent=1
+P: 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8872:BG34_500 56/33
+
+#77 spawn phase=DEATHS
+event={"seq":77,"type":"spawn","phase":"DEATHS","sourceEntityId":8865,"spawned":[{"entityId":8904,"cardId":"BGS_126","friendly":false,"attack":6,"health":1,"maxHealth":3,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[0]}
+player=2 opponent=2
+P: 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8904:BGS_126 6/1 | 8872:BG34_500 56/33
+
+#78 attack phase=ATTACK
+event={"seq":78,"type":"attack","phase":"ATTACK","attackerEntityId":8904,"defenderEntityId":8903}
+player=2 opponent=2
+P: 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8904:BGS_126 6/1 | 8872:BG34_500 56/33
+
+#79 damage phase=ATTACK
+event={"seq":79,"type":"damage","phase":"ATTACK","sourceEntityId":8903,"targetEntityId":8904,"damage":15,"kind":"combat"}
+player=2 opponent=2
+P: 8902:BG25_010t 15/2 | 8903:BG25_010t 15/2
+O: 8904:BGS_126 6/0 | 8872:BG34_500 56/33
+
+#80 damage phase=ATTACK
+event={"seq":80,"type":"damage","phase":"ATTACK","sourceEntityId":8904,"targetEntityId":8903,"damage":6,"kind":"combat"}
+player=2 opponent=2
+P: 8902:BG25_010t 15/2 | 8903:BG25_010t 15/0
+O: 8904:BGS_126 6/0 | 8872:BG34_500 56/33
+
+#81 damage phase=ATTACK
+event={"seq":81,"type":"damage","phase":"ATTACK","sourceEntityId":-1,"targetEntityId":8902,"damage":4,"kind":"combat"}
+player=2 opponent=2
+P: 8902:BG25_010t 15/0 | 8903:BG25_010t 15/0
+O: 8904:BGS_126 6/0 | 8872:BG34_500 56/33
+
+#82 minion-death phase=DEATHS
+event={"seq":82,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8904,8902,8903],"deadMinionsPositionsOnBoard":[0,0,0]}
+player=0 opponent=1
+P: 
+O: 8872:BG34_500 56/33
+
+#83 spawn phase=DEATHS
+event={"seq":83,"type":"spawn","phase":"DEATHS","sourceEntityId":8902,"spawned":[{"entityId":8905,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[0]}
+player=1 opponent=1
+P: 8905:BG25_010t 15/2
+O: 8872:BG34_500 56/33
+
+#84 spawn phase=DEATHS
+event={"seq":84,"type":"spawn","phase":"DEATHS","sourceEntityId":8903,"spawned":[{"entityId":8906,"cardId":"BG25_010t","friendly":true,"attack":15,"health":2,"maxHealth":2,"taunt":false,"poisonous":false,"venomous":false,"reborn":false,"windfury":false,"stealth":false}],"insertIndexes":[1]}
+player=2 opponent=1
+P: 8905:BG25_010t 15/2 | 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/33
+
+#85 attack phase=ATTACK
+event={"seq":85,"type":"attack","phase":"ATTACK","attackerEntityId":8905,"defenderEntityId":8872}
+player=2 opponent=1
+P: 8905:BG25_010t 15/2 | 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/33
+
+#86 damage phase=ATTACK
+event={"seq":86,"type":"damage","phase":"ATTACK","sourceEntityId":8872,"targetEntityId":8905,"damage":56,"kind":"combat"}
+player=2 opponent=1
+P: 8905:BG25_010t 15/0 | 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/33
+
+#87 damage phase=ATTACK
+event={"seq":87,"type":"damage","phase":"ATTACK","sourceEntityId":8905,"targetEntityId":8872,"damage":15,"kind":"combat"}
+player=2 opponent=1
+P: 8905:BG25_010t 15/0 | 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/18
+
+#88 minion-death phase=DEATHS
+event={"seq":88,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8905],"deadMinionsPositionsOnBoard":[0]}
+player=1 opponent=1
+P: 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/18
+
+#89 attack phase=ATTACK
+event={"seq":89,"type":"attack","phase":"ATTACK","attackerEntityId":8872,"defenderEntityId":8906}
+player=1 opponent=1
+P: 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/18
+
+#90 damage phase=ATTACK
+event={"seq":90,"type":"damage","phase":"ATTACK","sourceEntityId":8906,"targetEntityId":8872,"damage":15,"kind":"combat"}
+player=1 opponent=1
+P: 8906:BG25_010t 15/2
+O: 8872:BG34_500 56/3
+
+#91 damage phase=ATTACK
+event={"seq":91,"type":"damage","phase":"ATTACK","sourceEntityId":8872,"targetEntityId":8906,"damage":56,"kind":"combat"}
+player=1 opponent=1
+P: 8906:BG25_010t 15/0
+O: 8872:BG34_500 56/3
+
+#92 minion-death phase=DEATHS
+event={"seq":92,"type":"minion-death","phase":"DEATHS","deadEntityIds":[8906],"deadMinionsPositionsOnBoard":[0]}
+player=0 opponent=1
+P: 
+O: 8872:BG34_500 56/3
+
+#93 opponent-attack phase=END_OF_COMBAT
+event={"seq":93,"type":"opponent-attack","phase":"END_OF_COMBAT","damage":10}
+player=0 opponent=1
+P: 
+O: 8872:BG34_500 56/3

@@ -1,6 +1,7 @@
 python3 -m venv venv
 source venv/bin/activate
 
+make sure to checkout master branch not main
 npm run test-seeded
 # Test it
 

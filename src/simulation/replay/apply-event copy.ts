@@ -1,6 +1,6 @@
 // src/simulation/apply-event.ts
-import type { GameAction } from './spectator/game-action';
-import type { SpectatorCheckpoint, SpectatorEvent, CheckpointReason, CombatPhase } from './spectator/spectator';
+import type { GameAction } from '../spectator/game-action';
+import type { SpectatorCheckpoint, SpectatorEvent, CheckpointReason, CombatPhase } from '../spectator/spectator';
 
 // ------------------------------
 // Replay-state (viewer-grade)
