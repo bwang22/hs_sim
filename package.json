@@ -13,7 +13,8 @@
 		"package": "sam package --template-file template.yaml --s3-bucket com.zerotoheroes.artifact --output-template-file template.packaged.yaml",
 		"deploy": "sam deploy --template-file template.packaged.yaml --stack-name SimulateBgsBattleStack --capabilities CAPABILITY_IAM",
 		"full-deploy": "npm run build && npm run package && npm run deploy",
-		"publish-version": "rm -rf dist && tsc && rm -rf dist/node_modules && npm publish --access public"
+		"publish-version": "rm -rf dist && tsc && rm -rf dist/node_modules && npm publish --access public",
+		"serve": "ts-node src/http-server.ts"
 	},
 	"repository": {},
 	"author": "",
@@ -25,7 +26,8 @@
 		"dist/**/*"
 	],
 	"dependencies": {
-		"@firestone-hs/reference-data": "^3.0.171"
+		"@firestone-hs/reference-data": "^3.0.171",
+		"fastify": "^5.7.4"
 	},
 	"devDependencies": {
 		"@types/aws-lambda": "8.10.31",
