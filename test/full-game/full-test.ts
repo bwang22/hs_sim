@@ -7,8 +7,8 @@ import runSimulation, { assignCards } from '../../src/simulate-bgs-battle';
 import { applyDebugState } from './apply-debug-state';
 import jsonEvent3 from './game.json';
 import { mulberry32 } from "../../src/lib/rng";
-import { stateFromCheckpoint, applyEvent } from '../../src/simulation/apply-event';
-
+import { initReplayStateFromCheckpoint, applyEvent } from '../../src/simulation/replay/apply-event';
+export const stateFromCheckpoint = initReplayStateFromCheckpoint;
 
 console.log('starting test');
 const test = async () => {
@@ -35,7 +35,7 @@ const test = async () => {
 
 	applyDebugState();
 
-	const cardsStr = readFileSync('test/full-game/cards_enUS.json').toString();
+	const cardsStr = readFileSync('test/full-game/cards_bg.json').toString();
 	const allCards = new AllCardsLocalService(cardsStr);
 	// const allCards = new AllCardsService();
 	await allCards.initializeCardsDb();
@@ -104,7 +104,7 @@ const test = async () => {
 	// Run N steps and print
 	for (let k = 0; k < events.length; k++) {
 		if (!step()) break;
-		console.log(`seq=${state.seq} phase=${state.phase} lastAttack=`, state.lastAttack);
+		console.log(`seq=${state.seq} lastAttack=`, state.lastAttack);
 	}
 
 	const bodyObj = JSON.parse(result.body);

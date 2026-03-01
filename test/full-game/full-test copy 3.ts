@@ -33,7 +33,7 @@ const test = async () => {
 
 	applyDebugState();
 
-	const cardsStr = readFileSync('test/full-game/cards_bg.json').toString();
+	const cardsStr = readFileSync('test/full-game/cards_enUS.json').toString();
 	const allCards = new AllCardsLocalService(cardsStr);
 	// const allCards = new AllCardsService();
 	await allCards.initializeCardsDb();
