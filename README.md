@@ -4,7 +4,9 @@ source venv/bin/activate
 make sure to checkout master branch not main
 npm run test-seeded
 
-
+--to test server and curl to hit it
+PORT=8081 npm run serve
+curl -v -X POST "http://localhost:8081/v1/combat/simulate"   -H "Content-Type: application/json"   --data-binary @game.json
 # Test it
 
 ```
