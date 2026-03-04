@@ -1078,6 +1078,6 @@
 		"secrets": []
 	},
 	"opponentTeammateBoard": null,
-	"options": { "maxAcceptableDuration": 8000, "numberOfSimulations": 8000, "skipInfoLogs": false },
+	"options": { "maxAcceptableDuration": 8000, "numberOfSimulations": 1, "skipInfoLogs": false },
 	"gameState": { "currentTurn": 9, "validTribes": [20, 15, 14, 18, 11], "anomalies": ["BG27_Anomaly_504"] }
 }

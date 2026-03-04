@@ -92,6 +92,7 @@ export const simulateBattle = function* (
 		lostLethalPercent: undefined,
 		averageDamageWon: undefined,
 		averageDamageLost: undefined,
+		seed: 0,
 	};
 
 	const spectator = new Spectator(includeOutcomeSamples);

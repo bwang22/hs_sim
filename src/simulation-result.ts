@@ -26,6 +26,7 @@ export interface SimulationResult {
 	averageDamageWon: number;
 	averageDamageLost: number;
 	outcomeSamples?: OutcomeSamples;
+	seed: number;
 }
 
 export interface OutcomeSamples {
